@@ -1,4 +1,3 @@
-/* General Reset */
 * {
   box-sizing: border-box;
 }
@@ -9,10 +8,9 @@ html {
   flex-direction: column;
 }
 
-/* Dark Mode Body */
 body {
-  background-color: #181818; /* Dark background */
-  color: #e0e0e0; /* Light text */
+  background-color: #0f0f14;  /* Dark blueish background resembling a TV screen */
+  color: #d0d0d0;  /* Light grayish text */
   font-size: 14px;
   font-weight: 300;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
@@ -25,64 +23,80 @@ body {
   transition: opacity 0.3s;
 }
 
-/* Header and Text */
-h1, h2, h3, h4, h5, h6, button, footer, input, textarea, .copyright, .button {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", "Ubuntu", sans-serif;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+button,
+footer,
+input,
+textarea,
+.copyright,
+.button {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+    "Helvetica Neue", "Ubuntu", sans-serif;
   line-height: 125%;
 }
 
 h1 {
-  color: #ffffff; /* White text */
+  color: #d0d0d0;  /* Lighter text */
   font-size: 32px;
   font-weight: bold;
   margin: 0px;
 }
+
 h2 {
-  color: #ffffff; /* White text */
+  color: #d0d0d0;
   font-size: 28px;
   font-weight: bold;
   margin: 16px 0 8px 0;
 }
+
 h3 {
-  color: #ffffff; /* White text */
+  color: #d0d0d0;
   font-size: 24px;
   font-weight: 700;
   margin: 8px 0 4px 0;
 }
+
 h4 {
-  color: #ffffff; /* White text */
+  color: #d0d0d0;
   font-size: 18px;
   font-weight: 600;
   margin-top: 5px;
   margin-bottom: 4px;
 }
+
 h5 {
-  color: #ffffff; /* White text */
-  font-size: 16px;
-  font-weight: bold;
-  margin-top: 5px;
-  margin-bottom: 4px;
-}
-h6 {
-  color: #ffffff; /* White text */
+  color: #d0d0d0;
   font-size: 16px;
   font-weight: bold;
   margin-top: 5px;
   margin-bottom: 4px;
 }
 
-/* Link Styles */
+h6 {
+  color: #d0d0d0;
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 5px;
+  margin-bottom: 4px;
+}
+
 a {
-  color: #58a6ff; /* Light blue */
+  color: #5e97d1;  /* Soft blue links */
   text-decoration: none;
 }
 
-/* Buttons */
-.outlineButton, .button, button {
-  background-color: #333333; /* Dark button background */
+.outlineButton,
+.button,
+button {
+  background-color: #5e97d1;  /* Blue button */
   border: none;
   border-radius: 8px;
-  color: #e0e0e0; /* Light button text */
+  color: white;
   cursor: pointer;
   font-size: 16px;
   font-weight: 600;
@@ -91,18 +105,17 @@ a {
 }
 
 footer {
-  color: #7f7f7f; /* Light grey for footer */
+  color: #888;  /* Light gray footer text */
   margin: 40px;
 }
 
 footer a {
   font-weight: bold;
-  color: #e0e0e0; /* Light footer link text */
 }
 
 .pageContainer {
   padding: 30px 50px;
-  background-color: #252525; /* Dark background for page */
+  background-color: rgba(20, 20, 30, 0.8);  /* Semi-transparent dark blueish background */
   box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
   max-width: 900px;
@@ -117,7 +130,7 @@ footer a {
 }
 
 .headline span {
-  background-color: #444444; /* Dark background for spans */
+  background-color: rgba(20, 20, 30, 0.8);  /* Same background as page container */
   border-radius: 5px;
   padding: 6px;
   margin-left: 12px;
@@ -132,15 +145,16 @@ footer a {
 }
 
 .statusContainer {
-  border: 1px solid #444444; /* Dark borders */
+  border: 1px solid #333;  /* Darker border */
   border-radius: 5px;
   padding-top: 20px;
   text-align: left;
   padding: 24px;
+  background-color: rgba(30, 30, 40, 0.9);  /* Dark semi-transparent background */
 }
 
 .statusContainer + .statusContainer {
-  border-top: 1px solid #555555; /* Lighter border for separation */
+  border-top: 1px solid #444;  /* Lighter border between status items */
   margin-top: 30px;
 }
 
@@ -162,6 +176,7 @@ footer a {
 
 .sectionUrl {
   font-size: 14px;
+  color: #bbb;  /* Lighter gray for URLs */
 }
 
 .statusTitle {
@@ -183,7 +198,7 @@ footer a {
 }
 
 .statusHeadline {
-  color: #ccc; /* Light grey for status headline */
+  color: #bbb;  /* Lighter text */
   padding: 4px 8px;
   border-radius: 15px;
   font-size: 12px;
