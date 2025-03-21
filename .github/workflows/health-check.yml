@@ -12,9 +12,6 @@ jobs:
     name: Check all sites
     steps:
       - uses: actions/checkout@v3
-      - name: Print debug info
-        run: |
-          echo "Running workflow at $(date)"
       - name: Run Shell Script
         id: shell_script_run
         run: bash ./health-check.sh
