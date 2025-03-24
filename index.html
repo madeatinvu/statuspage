@@ -8,7 +8,7 @@
   <body>
     <div class="pageContainer">
       <div class="headline">
-        <img src="imgs/LOGO.png" alt="Logo" width="200px" />
+        <img src="LOGO.png" alt="Logo" width="200px" />
         <span> System Status </span>
       </div>
       <div id="reports" class="reportContainer"></div>
@@ -33,20 +33,15 @@
         <div id="statusContainerTemplate" class="statusContainer">
           <div class="statusHeader">
             <h6 class="statusTitle">$title&nbsp;</h6>
-            <div class="$color statusHeadline">$status</div>
           </div>
           <div class="statusSubtitle">
-            <div class="sectionUrl"><a href="$url">$url</a></div>
-            <div class="statusUptime">$upTime in the last 30 days</div>
+            <div class="$color statusHeadline">$status</div>
+            <div class="statusUptime">$upTime in the last 7 days</div>
           </div>
         </div>
       </div>
     </div>
     <footer>
-      Forked from
-      <a href="https://github.com/statsig-io/statuspage/"
-        >Statsig's Open-Source Status Page</a
-      >.
     </footer>
   </body>
   <script>
