@@ -2,11 +2,16 @@
   box-sizing: border-box;
 }
 
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
 html {
   height: 100%;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
 }
 
 body {
@@ -141,7 +146,7 @@ footer a {
 
 .reportContainer {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid layout */
   gap: 20px;
 }
 
@@ -156,7 +161,6 @@ footer a {
 
 .statusContainer + .statusContainer {
   border-top: 1px solid #444;  /* Lighter border between status items */
-  
 }
 
 .statusStreamContainer {
@@ -236,7 +240,6 @@ footer a {
   color: #fff;
 }
 
-
 .nodata {
   background-color: #f8f8f8;
   color: #ccc;
@@ -306,3 +309,48 @@ footer a {
   margin-top: 16px;
 }
 
+@media screen and (max-width: 800px) {
+  .pageContainer {
+    padding: 30px 20px;
+    margin: 0 auto 40px auto;
+  }
+
+  .statusHeader,
+  .statusSubtitle {
+    display: block;
+  }
+
+  .statusHeadline,
+  .sectionUrl,
+  .statusUptime {
+    margin-left: 0;
+    margin-top: 8px;
+    text-align: left;
+  }
+
+  .statusTitle,
+  .statusHeadline {
+    display: inline-block;
+  }
+
+  .statusSquare + .statusSquare {
+    margin-left: 1px;
+  }
+
+  .statusSquare {
+    min-width: 4px;
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .reportContainer {
+    grid-template-columns: repeat(4, 1fr); /* 4 columns for large screens */
+  }
+}
+
+@media screen and (min-width: 1600px) {
+  .reportContainer {
+    grid-template-columns: repeat(6, 1fr); /* 6 columns for very large screens */
+  }
+}
