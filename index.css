@@ -22,7 +22,6 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
     "Helvetica Neue", "Ubuntu", sans-serif;
   justify-content: center;
-  line-height: 22px;
   margin: 0;
   padding: 0;
   text-align: center;
@@ -120,7 +119,8 @@ footer a {
 }
 
 .pageContainer {
-  padding: 30px 50px;
+  padding: 15px 25px; /* Reduced padding */
+  margin: 0 auto 20px auto; /* Reduced margin */
   background-color: rgba(20, 20, 30, 0.8);  /* Semi-transparent dark blueish background */
   box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
@@ -146,8 +146,8 @@ footer a {
 
 .reportContainer {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive grid layout */
-  gap: 20px;
+  grid-template-columns: repeat(4, 1fr); /* 4 columns for large screens */
+  gap: 10px; /* Reduced gap */
 }
 
 .statusContainer {
@@ -157,10 +157,10 @@ footer a {
   text-align: center;
   padding: 24px;
   background-color: rgba(30, 30, 40, 0.9);  /* Dark semi-transparent background */
-}
-
-.statusContainer + .statusContainer {
-  border-top: 1px solid #444;  /* Lighter border between status items */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 150px; /* Set a fixed height */
 }
 
 .statusStreamContainer {
@@ -187,6 +187,8 @@ footer a {
 .statusTitle {
   text-transform: uppercase;
   align-items: center;
+  display: flex;
+  flex-direction: column;
 }
 
 .statusHeader {
@@ -206,7 +208,8 @@ footer a {
   border-radius: 15px;
   font-size: 12px;
   font-weight: 700;
-  white-space: pre-line;
+  display: flex;
+  flex-direction: column;
 }
 
 .statusUptime {
@@ -214,6 +217,9 @@ footer a {
   text-align: right;
   color: #bbb; /* Light grey uptime */
   font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }
 
 .uptimeContainer {
@@ -312,8 +318,8 @@ footer a {
 
 @media screen and (max-width: 800px) {
   .pageContainer {
-    padding: 30px 20px;
-    margin: 0 auto 40px auto;
+    padding: 15px 10px; /* Further reduced padding for smaller screens */
+    margin: 0 auto 20px auto;
   }
 
   .statusHeader,
@@ -352,12 +358,12 @@ footer a {
 
 @media screen and (min-width: 1600px) {
   .reportContainer {
-    grid-template-columns: repeat(6, 1fr); /* 6 columns for very large screens */
+    grid-template-columns: repeat(4, 1fr); /* 4 columns for very large screens */
   }
 }
 
 @media screen and (min-width: 1920px) {
   .reportContainer {
-    grid-template-columns: repeat(8, 1fr); /* 8 columns for ultra-large screens */
+    grid-template-columns: repeat(4, 1fr); /* 4 columns for ultra-large screens */
   }
 }
