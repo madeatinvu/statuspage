@@ -1,15 +1,26 @@
+console.log("index.js loaded");
+
 const maxDays = 7;
 
-async function genReportLog(container, key, url) {
-  const response = await fetch("logs/" + key + "_report.log");
+async function genReportLog(key, url) {
+  const response = await fetch("/status");
   let statusLines = "";
   if (response.ok) {
-    statusLines = await response.text();
+    const data = await response.json();
+    console.log("Fetched data:", data); // Debugging log
+    statusLines = data
+      .filter((entry) => entry.url === url)
+      .map((entry) => `${entry.created_at},${entry.result}`)
+      .join("\n");
+    console.log("Filtered status lines:", statusLines); // Debugging log
+  } else {
+    console.error("Failed to fetch status data");
   }
 
   const normalized = normalizeData(statusLines);
+  console.log("Normalized data:", normalized); // Debugging log
   const statusStream = constructStatusStream(key, url, normalized);
-  container.appendChild(statusStream);
+  return statusStream;
 }
 
 function constructStatusStream(key, url, uptimeData) {
@@ -31,6 +42,7 @@ function constructStatusStream(key, url, uptimeData) {
   });
 
   container.appendChild(streamContainer);
+  container.dataset.priority = getPriority(color);
   return container;
 }
 
@@ -49,6 +61,10 @@ function getColor(uptimeVal) {
     : uptimeVal < 0.3
     ? "failure"
     : "partial";
+}
+
+function getPriority(color) {
+  return color === "failure" ? 1 : color === "partial" ? 2 : 3;
 }
 
 function constructStatusSquare(key, date, uptimeVal) {
@@ -146,14 +162,17 @@ function normalizeData(statusLines) {
   const dateNormalized = splitRowsByDate(rows);
 
   let relativeDateMap = {};
-  const now = Date.now();
-  for (const [key, val] of Object.entries(dateNormalized)) {
-    if (key == "upTime") {
-      continue;
-    }
+  const now = new Date();
+  for (let i = 0; i < maxDays; i++) {
+    const date = new Date(now);
+    date.setDate(now.getDate() - i);
+    const dateStr = date.toDateString();
 
-    const relDays = getRelativeDays(now, new Date(key).getTime());
-    relativeDateMap[relDays] = getDayAverage(val);
+    if (dateNormalized[dateStr]) {
+      relativeDateMap[i] = getDayAverage(dateNormalized[dateStr]);
+    } else {
+      relativeDateMap[i] = null; // No data for this day
+    }
   }
 
   relativeDateMap.upTime = dateNormalized.upTime;
@@ -183,14 +202,14 @@ function splitRowsByDate(rows) {
     }
 
     const [dateTimeStr, resultStr] = row.split(",", 2);
-    const dateTime = new Date(Date.parse(dateTimeStr.replace(/-/g, "/") + " GMT"));
+    const dateTime = new Date(Date.parse(dateTimeStr));
     const dateStr = dateTime.toDateString();
 
     let resultArray = dateValues[dateStr];
     if (!resultArray) {
       resultArray = [];
       dateValues[dateStr] = resultArray;
-      if (dateValues.length > maxDays) {
+      if (Object.keys(dateValues).length > maxDays) {
         break;
       }
     }
@@ -237,9 +256,10 @@ function hideTooltip() {
 }
 
 async function genAllReports() {
-  const response = await fetch("urls.cfg");
+  const response = await fetch("/urls");
   const configText = await response.text();
   const configLines = configText.split("\n");
+  const containers = [];
   for (let ii = 0; ii < configLines.length; ii++) {
     const configLine = configLines[ii];
     const [key, url] = configLine.split("=");
@@ -247,6 +267,16 @@ async function genAllReports() {
       continue;
     }
 
-    await genReportLog(document.getElementById("reports"), key, url);
+    const container = await genReportLog(key, url);
+    containers.push(container);
   }
+
+  // Sort containers by priority
+  containers.sort((a, b) => a.dataset.priority - b.dataset.priority);
+
+  // Append sorted containers to the DOM
+  const reportsContainer = document.getElementById("reports");
+  containers.forEach(container => {
+    reportsContainer.appendChild(container);
+  });
 }
