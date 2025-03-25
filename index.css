@@ -146,8 +146,8 @@ footer a {
 
 .reportContainer {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 columns for large screens */
-  gap: 10px; /* Reduced gap */
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive grid layout */
+  gap: 20px;
 }
 
 .statusContainer {
@@ -157,10 +157,10 @@ footer a {
   text-align: center;
   padding: 24px;
   background-color: rgba(30, 30, 40, 0.9);  /* Dark semi-transparent background */
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 150px; /* Set a fixed height */
+}
+
+.statusContainer + .statusContainer {
+  border-top: 1px solid #444;  /* Lighter border between status items */
 }
 
 .statusStreamContainer {
@@ -187,8 +187,6 @@ footer a {
 .statusTitle {
   text-transform: uppercase;
   align-items: center;
-  display: flex;
-  flex-direction: column;
 }
 
 .statusHeader {
@@ -208,8 +206,6 @@ footer a {
   border-radius: 15px;
   font-size: 12px;
   font-weight: 700;
-  display: flex;
-  flex-direction: column;
 }
 
 .statusUptime {
@@ -217,9 +213,6 @@ footer a {
   text-align: right;
   color: #bbb; /* Light grey uptime */
   font-size: 12px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
 }
 
 .uptimeContainer {
@@ -318,8 +311,8 @@ footer a {
 
 @media screen and (max-width: 800px) {
   .pageContainer {
-    padding: 15px 10px; /* Further reduced padding for smaller screens */
-    margin: 0 auto 20px auto;
+    padding: 30px 20px;
+    margin: 0 auto 40px auto;
   }
 
   .statusHeader,
@@ -358,12 +351,12 @@ footer a {
 
 @media screen and (min-width: 1600px) {
   .reportContainer {
-    grid-template-columns: repeat(4, 1fr); /* 4 columns for very large screens */
+    grid-template-columns: repeat(6, 1fr); /* 6 columns for very large screens */
   }
 }
 
 @media screen and (min-width: 1920px) {
   .reportContainer {
-    grid-template-columns: repeat(4, 1fr); /* 4 columns for ultra-large screens */
+    grid-template-columns: repeat(8, 1fr); /* 8 columns for ultra-large screens */
   }
 }
